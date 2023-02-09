@@ -153,6 +153,7 @@ const app = Vue.createApp({
           console.log(res);
           alert(res.data.message);
           this.tempCart = [];
+          this.final_total = 0;
           this.form = {
             user: {
               email: "",
