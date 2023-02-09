@@ -1,4 +1,4 @@
-import userProductModal from "/userProductModal.js";
+import userProductModal from "./userProductModal.js";
 
 const url = "https://vue3-course-api.hexschool.io/v2";
 const path = "aurora-path";
