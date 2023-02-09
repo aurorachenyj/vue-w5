@@ -33,6 +33,15 @@ const app = Vue.createApp({
       selectProductId: "",
       loadingItem: "",
       isLoading: false,
+      form: {
+        user: {
+          email: "",
+          name: "",
+          tel: "",
+          address: "",
+        },
+        message: "",
+      },
     };
   },
   mounted() {
@@ -127,6 +136,39 @@ const app = Vue.createApp({
     productDetail(proId) {
       this.selectProductId = proId;
     },
+    sendOrder() {
+      console.log(this.tempCart);
+      if (this.tempCart.length === 0) {
+        alert("購物車不可為空");
+        return;
+      }
+      console.log(this.tempCart.length);
+      console.log(this.form);
+
+      const data = this.form;
+
+      axios
+        .post(`${url}/api/${path}/order`, { data })
+        .then((res) => {
+          console.log(res);
+          alert(res.data.message);
+          this.tempCart = [];
+          this.form = {
+            user: {
+              email: "",
+              name: "",
+              tel: "",
+              address: "",
+            },
+            message: "",
+          };
+        })
+
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/;
       return phoneNumber.test(value) ? true : "需要正確的電話號碼";

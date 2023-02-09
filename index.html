@@ -169,7 +169,7 @@
 
         <!-- 驗證表單自寫  -->
         <div class="my-5 row justify-content-center">
-          <v-form class="col-md-6" v-slot="{ errors }">
+          <v-form class="col-md-6" v-slot="{ errors }" @submit="sendOrder">
             <div class="mb-3">
               <label for="userName" class="form-label">姓名</label>
               <v-field
@@ -180,6 +180,7 @@
                 id="userName"
                 placeholder="請輸入姓名"
                 rules="required|min:2"
+                v-model="form.user.name"
               >
               </v-field>
               <error-message
@@ -197,6 +198,7 @@
                 placeholder="name@example.com"
                 :class="{ 'is-invalid': errors['email'] }"
                 rules="required|email"
+                v-model="form.user.email"
               >
               </v-field>
               <error-message
@@ -216,6 +218,7 @@
                 :class="{ 'is-invalid': errors['電話'] }"
                 rules="required|numeric|min:8"
                 :rules="isPhone"
+                v-model="form.user.tel"
               >
               </v-field>
               <error-message
@@ -234,6 +237,7 @@
                 name="地址"
                 :class="{ 'is-invalid': errors['地址'] }"
                 rules="required|min:8"
+                v-model="form.user.address"
               ></v-field>
               <error-message
                 name="地址"
@@ -243,7 +247,12 @@
 
             <div class="mb-3">
               <label for="message" class="form-label">留言</label>
-              <textarea class="form-control" id="message" rows="3"></textarea>
+              <textarea
+                v-model="form.message"
+                class="form-control"
+                id="message"
+                rows="3"
+              ></textarea>
             </div>
 
             <div class="text-end">
