@@ -121,6 +121,11 @@ const app = Vue.createApp({
         });
     },
     delCart() {
+      if (this.tempCart.length === 0) {
+        alert("購物車目前沒有商品");
+        return;
+      }
+
       this.isLoading = true;
       axios
         .delete(`${url}/api/${path}/carts`)
